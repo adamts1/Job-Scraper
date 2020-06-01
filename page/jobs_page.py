@@ -66,11 +66,11 @@ class JobsPages:
                 self.browser.find_element_by_xpath(f"//*[@id=\"body\"]/ul[4]/li[{str_el}]").click()
                 break
 
-
     def orchestrator(self, main_keyword: str, category: str, area: str) -> List[JobsParser]:
         self.insert_main_field(main_keyword)
         self.insert_category_field(category)
         self.insert_area_field(area)
+        time.sleep(5)
         self.get_search_bottun
         time.sleep(5)
         return self.jobs
