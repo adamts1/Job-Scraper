@@ -1,15 +1,9 @@
 from typing import List
-
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.support.wait import WebDriverWait
 from locator.search_locators import SearchLocators
 from locator.jobs_locators import JobsLocators
 from parsers.jobs_parser import JobsParser
-import time
 
+import time
 
 class JobsPages:
     def __init__(self, browser):
