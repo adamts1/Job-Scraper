@@ -1,23 +1,38 @@
 from typing import List
+
 from locator.search_locators import SearchLocators
 from locator.jobs_locators import JobsLocators
 from parsers.jobs_parser import JobsParser
-
+from global1.global_var import GlobalVar
 import time
+
 
 class JobsPages:
     def __init__(self, browser):
         self.browser = browser
         self.dropdowns = []
+        self.list_of_jobs = []
+        self.list_of_list = []
+
 
     @property
-    def jobs(self) -> List[JobsParser]:
-        return [
-            JobsParser(e)
-            for e in self.browser.find_elements_by_css_selector(
-                JobsLocators.JOB
-            )
-        ]
+    def jobs(self):
+        self.list_of_jobs = [JobsParser(e)for e in self.browser.find_elements_by_css_selector(JobsLocators.JOB)]
+        print(self.list_of_jobs)
+        while self.next_page == True:
+            self.browser.find_elements_by_css_selector('.jobListPageNumberContainer.contentDivider > a')[-1].click()
+            self.list_of_jobs = [JobsParser(e) for e in self.browser.find_elements_by_css_selector(JobsLocators.JOB)]
+            print(self.list_of_jobs)
+        # return self.list_of_jobs
+
+
+    @property
+    def next_page(self):
+        if self.browser.find_elements_by_css_selector('.jobListPageNumberContainer.contentDivider > a')[-1]. \
+                get_attribute('innerHTML') == "הבא »":
+            return True
+        else:
+            return False
 
     @property
     def get_main_field(self):
@@ -60,11 +75,14 @@ class JobsPages:
                 self.browser.find_element_by_xpath(f"//*[@id=\"body\"]/ul[4]/li[{str_el}]").click()
                 break
 
-    def orchestrator(self, main_keyword: str, category: str, area: str) -> List[JobsParser]:
+    def orchestrator(self, main_keyword: str, category: str, area: str, driver) -> List[JobsParser]:
         self.insert_main_field(main_keyword)
         self.insert_category_field(category)
         self.insert_area_field(area)
         time.sleep(5)
         self.get_search_bottun
-        time.sleep(5)
-        return self.jobs
+        if driver.find_elements_by_css_selector(JobsLocators.JOB):
+            self.jobs
+            return GlobalVar.GLOBAL_LIST
+        else:
+            driver.close()
