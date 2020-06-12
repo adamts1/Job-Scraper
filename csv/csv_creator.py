@@ -1,21 +1,12 @@
-from global1.global_var import GlobalVar
-
-
 class CsvCreator:
-    def __init__(self, job_content):
-        self.job_content = job_content
-        self.job_content_list = []
+    def __init__(self, list_of_jobs):
+        self.list_of_jobs = list_of_jobs
 
     @property
     def concatinate_json(self):
-        self.job_content_list.append(self.job_content)
-        GlobalVar.GLOBAL_LIST.append(self.job_content_list)
-        # print(GlobalVar.GLOBAL_LIST)
-        return GlobalVar.GLOBAL_LIST
-
-
-
-
-
-
-
+        print(__name__)
+        with open('csv.csv', 'w', encoding="utf8") as f:
+            for dict in self.list_of_jobs:
+                f.write(f'\n')
+                for key in dict:
+                    f.write(f'{dict[key]},')

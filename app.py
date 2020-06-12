@@ -2,6 +2,7 @@ from selenium import webdriver
 from page.jobs_page import JobsPages
 import logging
 from global1.global_var import GlobalVar
+from csv.csv_creator import CsvCreator
 
 
 logging.basicConfig(format='%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
@@ -10,7 +11,7 @@ logging.basicConfig(format='%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d
                     filename='logs.txt')
 logger = logging.getLogger('scraping')
 ###########################
-category_input = "הייטק-QA"
+category_input = "כל הקטגוריות"
 area_input = "מרכז"
 
 
@@ -20,7 +21,7 @@ def start():
     driver.get("https://www.drushim.co.il/")
     driver.maximize_window()
     page = JobsPages(driver)
-    status = page.orchestrator("Python", category_input, area_input, driver)
+    status = page.orchestrator("Python", category_input, area_input)
     return status
 
 
@@ -31,3 +32,5 @@ if __name__ == '__main__':
         content = start()
         retry = retry - 1
     print(content)
+
+CsvCreator(GlobalVar.GLOBAL_LIST).concatinate_json

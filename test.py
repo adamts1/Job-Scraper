@@ -1,25 +1,27 @@
-import json
-
-from selenium import webdriver
-import time
-import os, sys
-
-# driver = webdriver.Chrome(
-#     'C:/Users/Adam/Main/The Comlete Python course/12_browser_automation/chromedriver_win32/chromedriver.exe')
-# driver.get("https://www.drushim.co.il/jobs/cat24/area/1-2-3-4-5-6-7-8-9/?searchterm=python")
-# driver.maximize_window()
-#
-# driver.refresh()
-#
-# time.sleep(12)
-# # while driver.find_elements_by_css_selector('.jobListPageNumberContainer.contentDivider > a')[-1].get_attribute('innerHTML') == "הבא »":
-# #     driver.find_elements_by_css_selector('.jobListPageNumberContainer.contentDivider > a')[-1].click()
-# #     time.sleep(1)
-#
-# driver.refresh()
-#
+import csv
 
 
-json_string = json.dumps("ברי צקלה", ensure_ascii=False).encode('utf8')
-print(json_string)
-print(json_string.decode())
+csv_columns = ['No', 'Name', 'Country']
+dict_data = [
+    {'No': 1, 'Name': 'sss', 'Country': 'I\nndsia'},
+    {'No': 2, 'Name': 'Ben', 'Country': 's'},
+    {'No': 3, 'Name': 'Shri Ram', 'Country': 'ישראל'},
+    {'No': 4, 'Name': 'Smith', 'Country': 'USA'},
+    {'No': 5, 'Name': 'Yuva Raj', 'Country': 'India'},  
+]
+
+csv_file = 'csv.csv'
+
+
+def output_to_file(output):
+    with open(csv_file, 'w', encoding="utf8") as f:
+        # f.write("sss,dd")
+        for dict in output:
+            f.write(f'\n')
+            for key in dict:
+                f.write(f'{dict[key]},')
+            #f.write(f'{dict["Name"]}, {dict["Country"]}\n')
+
+
+
+output_to_file(dict_data)

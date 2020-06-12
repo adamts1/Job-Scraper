@@ -75,14 +75,14 @@ class JobsPages:
                 self.browser.find_element_by_xpath(f"//*[@id=\"body\"]/ul[4]/li[{str_el}]").click()
                 break
 
-    def orchestrator(self, main_keyword: str, category: str, area: str, driver) -> List[JobsParser]:
+    def orchestrator(self, main_keyword: str, category: str, area: str) -> List[JobsParser]:
         self.insert_main_field(main_keyword)
         self.insert_category_field(category)
         self.insert_area_field(area)
         time.sleep(5)
         self.get_search_bottun
-        if driver.find_elements_by_css_selector(JobsLocators.JOB):
+        if self.browser.find_elements_by_css_selector(JobsLocators.JOB):
             self.jobs
             return GlobalVar.GLOBAL_LIST
         else:
-            driver.close()
+            self.browser.close()
