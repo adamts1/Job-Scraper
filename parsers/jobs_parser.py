@@ -1,7 +1,6 @@
 from locator.jobs_locators import JobsLocators
 from helper.clean_values import CleanValues
 from global1.global_var import GlobalVar
-import json
 
 
 class JobsParser:
@@ -32,11 +31,11 @@ class JobsParser:
         self.result["Title"] = CleanValues(self.parent.find_element_by_css_selector(locator).text).replace_cahrs
         return self.result
 
-    @property
-    def content(self):
-        locator = JobsLocators.ALL_SECTION
-        self.result["Content"] = CleanValues(self.parent.find_element_by_css_selector(locator).text).replace_cahrs
-        return self.result
+    # @property
+    # def content(self):
+    #     locator = JobsLocators.ALL_SECTION
+    #     self.result["Content"] = CleanValues(self.parent.find_element_by_css_selector(locator).text).replace_cahrs
+    #     return self.result
 
     @property
     def date(self):
@@ -52,14 +51,14 @@ class JobsParser:
 
     @property
     def job_requirements(self):
-     try:
-         locator = JobsLocators.JOB_REQUIREMENTS
-         requirements = self.parent.find_element_by_css_selector(locator)
-         requirements = requirements.get_attribute("innerHTML")
-         self.result["Requirements"] = CleanValues(requirements).replace_cahrs
-     except:
-         self.result = {}
-     return self.result
+        try:
+            locator = JobsLocators.JOB_REQUIREMENTS
+            requirements = self.parent.find_element_by_css_selector(locator)
+            requirements = requirements.get_attribute("innerHTML")
+            self.result["Requirements"] = CleanValues(requirements).replace_cahrs
+        except:
+            self.result = {}
+        return self.result
 
     @property
     def bottom_section(self):

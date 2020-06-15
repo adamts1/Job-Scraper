@@ -28,11 +28,15 @@ class JobsPages:
 
     @property
     def next_page(self):
-        if self.browser.find_elements_by_css_selector('.jobListPageNumberContainer.contentDivider > a')[-1]. \
-                get_attribute('innerHTML') == "הבא »":
-            return True
-        else:
+        try:
+            if self.browser.find_elements_by_css_selector('.jobListPageNumberContainer.contentDivider > a')[-1]. \
+                    get_attribute('innerHTML') == "הבא »":
+                return True
+            else:
+                return False
+        except:
             return False
+
 
     @property
     def get_main_field(self):
