@@ -20,7 +20,7 @@ class JobsPages:
         self.list_of_jobs = [JobsParser(e)for e in self.browser.find_elements_by_css_selector(JobsLocators.JOB)]
         print(self.list_of_jobs)
         while self.next_page == True:
-            self.browser.find_elements_by_css_selector('.jobListPageNumberContainer.contentDivider > a')[-1].click()
+            self.browser.find_elements_by_css_selector(SearchLocators.NEXT_PAGE)[-1].click()
             self.list_of_jobs = [JobsParser(e) for e in self.browser.find_elements_by_css_selector(JobsLocators.JOB)]
             print(self.list_of_jobs)
         # return self.list_of_jobs
@@ -29,7 +29,7 @@ class JobsPages:
     @property
     def next_page(self):
         try:
-            if self.browser.find_elements_by_css_selector('.jobListPageNumberContainer.contentDivider > a')[-1]. \
+            if self.browser.find_elements_by_css_selector(SearchLocators.NEXT_PAGE)[-1]. \
                     get_attribute('innerHTML') == "הבא »":
                 return True
             else:
@@ -61,7 +61,7 @@ class JobsPages:
 
     def insert_category_field(self, category: str):
         self.get_category_field
-        category_len = len(self.browser.find_elements_by_xpath("//*[@id=\"body\"]/ul[3]/li"))
+        category_len = len(self.browser.find_elements_by_xpath(JobsLocators.CATEGORY_LENGTH))
         for el in range(1, category_len):
             str_el = str(el)
             option = self.browser.find_element_by_xpath(f"//*[@id=\"body\"]/ul[3]/li[{str_el}]/a").text
@@ -71,7 +71,7 @@ class JobsPages:
 
     def insert_area_field(self, area: str):
         self.get_area_field
-        area_len = len(self.browser.find_elements_by_xpath("//*[@id=\"body\"]/ul[4]/li"))
+        area_len = len(self.browser.find_elements_by_xpath(SearchLocators.AREA))
         for el in range(1, area_len):
             str_el = str(el)
             option = self.browser.find_element_by_xpath(f"//*[@id=\"body\"]/ul[4]/li[{str_el}]/a").text

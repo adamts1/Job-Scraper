@@ -31,12 +31,6 @@ class JobsParser:
         self.result["Title"] = CleanValues(self.parent.find_element_by_css_selector(locator).text).replace_cahrs
         return self.result
 
-    # @property
-    # def content(self):
-    #     locator = JobsLocators.ALL_SECTION
-    #     self.result["Content"] = CleanValues(self.parent.find_element_by_css_selector(locator).text).replace_cahrs
-    #     return self.result
-
     @property
     def date(self):
         locator = JobsLocators.JOB_DATE
